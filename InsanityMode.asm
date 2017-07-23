@@ -1,9 +1,12 @@
-//Entry Point.. blah.
-.org 0x80025C00
+//Entry Point, Wind speed and Wind Direction...
+.org 0xBA9F0
+ADDIU SP, SP, -0xD0
+SW RA, 0x14(SP)
 
-//Wind Speed
-.orga 0xECA179 //This is the ROM offset that we need to write into.
-LUI A0, 0x0000
-ORI A1, A1, 0x0001
-//code for Wind Direction
-.orga 0xECA17C
+LW V1, 0xA9F0(V1)
+ORI A0, A1, 0x0001
+JAL 0x800A7B20
+
+LW RA, 0x14(SP)
+JR RA
+ADDIU SP, SP, 0x18
